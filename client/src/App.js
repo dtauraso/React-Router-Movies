@@ -15,7 +15,11 @@ const App = () => {
       <SavedList list={savedList} />
       {/* <div>Replace this Div with your Routes</div> */}
       <Route exact path="/" component={MovieList} />
-      <Route path="/movies/:movieID" component={Movie} />
+      <Route path="/movies/:movieID"
+            // component={Movie}
+            // props is used by the Route to send to the component I'm returning
+            render={(props) => {return <Movie {...props} saveList={addToSavedList}/>}}
+             />
 
 
     </div>

@@ -12,7 +12,6 @@ const MovieList = props => {
   // searchResults is used to set the search result.
   const [searchResults, setSearchResults] = useState([])
   
-  let moviesLoaded = false
   const [movies, setMovies] = useState([])
   // The 2 useEffects will race each other
   // We only want the useEffect to do something if the movies are in a certain state
@@ -44,7 +43,6 @@ const MovieList = props => {
 
     // console.log(moviesLoaded)
     // if(moviesLoaded) {
-      if(movies.length > 0) {
       setSearchResults(movies)
       // will need to make sure the useEffect only searches for data when there are movies to filter
         // console.log("here")
@@ -57,9 +55,8 @@ const MovieList = props => {
           console.log(results)
           // filtered set of movies
           setSearchResults(results)
-          // moviesLoaded = false
         }
-    }
+    
     
   },[searchTerm]);
 

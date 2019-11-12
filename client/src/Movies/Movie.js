@@ -4,7 +4,7 @@ import MovieCard from "./MovieCard";
 
 const Movie = (props) => {
   const [movie, setMovie] = useState();
- 
+ console.log(props)
   useEffect(() => {
     const id = props.match.params.movieID;
     // console.log(props)
@@ -22,6 +22,7 @@ const Movie = (props) => {
 
   },[]);
   
+  // I don't seem to need this to save movies
   // Uncomment this only when you have moved on to the stretch goals
   // const saveMovie = () => {
   //   const addToSavedList = props.addToSavedList;
@@ -37,7 +38,7 @@ const Movie = (props) => {
     <div className="save-wrapper">
 
       <MovieCard movie = {movie}/>
-      <div className="save-button">Save</div>
+      <div className="save-button" onClick={() => {props.saveList(movie)}}>Save</div>
 
     </div>
 
