@@ -1,12 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import MovieCard from "./MovieCard";
+import { Link, NavLink } from "react-router-dom";
 
 const Movie = (props) => {
   const [movie, setMovie] = useState();
- console.log(props)
+//  console.log(props)
+  const id = props.match.params.movieID;
+
+  // was going here to fetch the movie
   useEffect(() => {
-    const id = props.match.params.movieID;
     // console.log(props)
     // change ^^^ that line and grab the id from the URL
     // You will NEED to add a dependency array to this effect hook
@@ -20,14 +23,24 @@ const Movie = (props) => {
           console.error(error);
         });
 
-  },[]);
+  },[id]);
+  // const makeURL = (movie) => {
   
-  // I don't seem to need this to save movies
-  // Uncomment this only when you have moved on to the stretch goals
-  // const saveMovie = () => {
-  //   const addToSavedList = props.addToSavedList;
-  //   addToSavedList(movie)
+  //   console.log("movie", `/movies/${movie.id}`)
+  //   return `/movies/${movie.id}`
   // }
+  
+  // Not sure why I'm using saveMovie to do what addToSavedList does
+  // The movie titles show up in both cases
+  // Uncomment this only when you have moved on to the stretch goals
+  const saveMovie = () => {
+    const addToSavedList = props.addToSavedList;
+    // console.log("saving", movie)
+    // addToSavedList(movie)
+    addToSavedList(<NavLink activeClassName='active' to={`/movies/${movie.id}`}>
+      {movie.title}
+      </NavLink>)
+  }
 
   if (!movie) {
     return <div>Loading movie information...</div>;
@@ -37,8 +50,8 @@ const Movie = (props) => {
   return (
     <div className="save-wrapper">
 
-      <MovieCard movie = {movie}/>
-      <div className="save-button" onClick={() => {props.saveList(movie)}}>Save</div>
+      <MovieCard key = {movie.id} movie = {movie}/>
+      <div className="save-button" onClick={() => saveMovie()}>Save</div>
 
     </div>
 

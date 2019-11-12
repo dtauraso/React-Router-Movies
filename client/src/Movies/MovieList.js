@@ -5,6 +5,7 @@ import MovieCard from './MovieCard';
 
 const MovieList = props => {
 
+  console.log("movie list", props)
   // searchTerm will save the data from the search input on every occurance of the change event.
 
   const [searchTerm, setSearchTerm] = useState("")
@@ -52,7 +53,7 @@ const MovieList = props => {
           // console.log("can filter", searchResults, searchTerm)
           const results = searchResults.filter(movie => 
             movie.title.toLowerCase().includes(searchTerm.toLowerCase()));
-          console.log(results)
+          // console.log(results)
           // filtered set of movies
           setSearchResults(results)
         }
@@ -101,7 +102,7 @@ function MovieDetails({ movie }) {
   return (
     <Link to={`/movies/${movie.id}`}>
 
-      <MovieCard movie = {movie}/>
+      <MovieCard key = {movie.id} movie = {movie}/>
       
     </Link>
 
