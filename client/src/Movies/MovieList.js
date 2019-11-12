@@ -13,7 +13,11 @@ const MovieList = props => {
   
   let moviesLoaded = false
   const [movies, setMovies] = useState([])
+  // The 2 useEffects will race each other
+  // We only want the useEffect to do something if the movies are in a certain state
   useEffect(() => {
+
+    //  when this is called is less relevant than what is being saved
      if(movies.length === 0) {
       const getMovies = () => {
         axios
@@ -39,6 +43,7 @@ const MovieList = props => {
 
     // console.log(moviesLoaded)
     // if(moviesLoaded) {
+      if(movies.length > 0) {
       setSearchResults(movies)
       // will need to make sure the useEffect only searches for data when there are movies to filter
         // console.log("here")
@@ -53,7 +58,7 @@ const MovieList = props => {
           setSearchResults(results)
           // moviesLoaded = false
         }
-    // }
+    }
     
   },[searchTerm]);
 
