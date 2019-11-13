@@ -6,7 +6,8 @@ import { Link, NavLink } from "react-router-dom";
 const Movie = (props) => {
   const [movie, setMovie] = useState();
 //  console.log(props)
-  const id = props.match.params.movieID;
+// is out here so it can be a dependency
+const id = props.match.params.movieID;
 
   // was going here to fetch the movie
   useEffect(() => {
@@ -51,6 +52,7 @@ const Movie = (props) => {
     <div className="save-wrapper">
 
       <MovieCard key = {movie.id} movie = {movie}/>
+
       <div className="save-button" onClick={() => saveMovie()}>Save</div>
 
     </div>

@@ -17,6 +17,8 @@ const App = () => {
       <Route exact path="/" component={MovieList} />
       <Route exact path="/movies/:movieID"
             // component={Movie}
+            // high level prop stuff
+            // ...container = dump contents into whatever is running this
             // props is used by the Route to send to the component I'm returning
             render={(props) => {return <Movie {...props} addToSavedList={addToSavedList}/>}}
              />

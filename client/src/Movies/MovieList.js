@@ -19,13 +19,20 @@ const MovieList = props => {
   useEffect(() => {
 
     //  when this is called is less relevant than what is being saved
-     if(movies.length === 0) {
+    //  if(movies.length === 0) {
       const getMovies = () => {
         axios
           .get('http://localhost:5000/api/movies')
           .then(response => {
             setMovies(response.data);
-            setSearchResults(response.data)
+            // setSearchResults(response.data)
+            // searching here so the search works when you type text backwards
+            // and forwards
+            const results = response.data.filter(movie => 
+              movie.title.toLowerCase().includes(searchTerm.toLowerCase()));
+  
+            setSearchResults(results)
+  
             // console.log("setup", searchResults)
           })
           .catch(error => {
@@ -35,31 +42,10 @@ const MovieList = props => {
       
       getMovies();
     //   moviesLoaded = true
-    }
+    // }
     
   }, [searchTerm]);
 
-
-  useEffect(() => {
-
-    // console.log(moviesLoaded)
-    // if(moviesLoaded) {
-      setSearchResults(movies)
-      // will need to make sure the useEffect only searches for data when there are movies to filter
-        // console.log("here")
-        // console.log(searchResults)
-    
-        if(searchResults.length > 0) {
-          // console.log("can filter", searchResults, searchTerm)
-          const results = searchResults.filter(movie => 
-            movie.title.toLowerCase().includes(searchTerm.toLowerCase()));
-          // console.log(results)
-          // filtered set of movies
-          setSearchResults(results)
-        }
-    
-    
-  },[searchTerm]);
 
   const handleChange = event => {
       // console.log(event.target.value)
